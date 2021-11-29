@@ -1,21 +1,17 @@
 import React from 'react';
-import { Container } from 'react-bootstrap';
-import Footer from './components/Footer/Footer';
-import Header from './components/Header/Header';
-import ProductContainer from './components/ProductContainer/ProductContainer';
-
+import { BrowserRouter as Router,Routes,Route,Link} from "react-router-dom";
+import HomePage from './components/Pages/HomePage/HomePage';
+import ProductPage from './components/Pages/ProductPage/ProductPage';
 
 const App = () => {
   return (
-    <>
-      <Header/>
-      <main className="py-3">
-        <Container>
-          <ProductContainer/>
-        </Container>
-      </main>
-      <Footer/>
-    </>
+    <Router>
+      <Routes>
+        <Route path="/"  element={<HomePage />} />
+        <Route path="/home" element={<HomePage />} />
+        <Route path="/product/:id" element={<ProductPage />} />
+      </Routes>
+    </Router>
   );
 };
 

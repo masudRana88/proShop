@@ -5,7 +5,7 @@ export const productListReduser = (state= {products : []}, action) => {
         case "PRODUCT_LIST_SUCCESS":
             return { isLoding: false, products: action.payload };
         case "PRODUCT_LIST_FAIL":
-            return { isLoding: false, products: [], error: action.payload };
+            return { isLoding: false, products: [], error: action.error };
         default: 
             return state
     }

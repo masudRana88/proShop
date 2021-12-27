@@ -7,9 +7,9 @@ export const productRequest = async(dispach, reduser) => {
 
         const {data} = await axios.get("http://localhost:5000/api/products")
         
-        
+
         await dispach({type: "PRODUCT_LIST_SUCCESS", payload: data},reduser)
     } catch (error) {
-        dispach({type: "PRODUCT_LIST_FAIL", error: "Sorry! No Product is found"},reduser)
+        dispach({type: "PRODUCT_LIST_FAIL", error: "Sorry! Product is not found ..."},reduser)
     }
 }

@@ -6,6 +6,8 @@ import Product from '../Product/Product';
 import { productRequest } from "../../redux/action/productRequest/productRequest"
 import { productListReduser } from '../../redux/reduser/productListReduser';
 import { store } from '../../redux/store';
+import Loader from '../Loader/Loader';
+import Message from '../Message/Message';
 
 
 const ProductContainer = () => {
@@ -20,9 +22,8 @@ const ProductContainer = () => {
     return (
         <>
             <h3>Our Letest Product</h3>
-            {isLoding ?<div class="spinner-border text-dark" role="status">
-                            <span class="visually-hidden"></span>
-                        </div> : error?<h2>{error}</h2>:<Row>
+            {isLoding ?
+                <Loader /> : error ? <Message variant="danger"><p>{ error}</p></Message> : <Row>
                 {
                  products.map(product => (
                      <Col key={product._id} sm={12} md={6} lg={4}>

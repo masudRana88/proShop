@@ -4,7 +4,6 @@ import { Col, Row } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
 import Product from '../Product/Product';
 import { productRequest } from "../../redux/action/productRequest/productRequest"
-import { productListReduser } from '../../redux/reduser/productListReduser';
 import { store } from '../../redux/store';
 import Loader from '../Loader/Loader';
 import Message from '../Message/Message';
@@ -17,7 +16,7 @@ const ProductContainer = () => {
     const { isLoding, error, products } = productList; 
     console.log(productList)
     useEffect(() => {
-        productRequest(dispacth, productListReduser)
+        dispacth(productRequest())
     },[])
     return (
         <>

@@ -1,15 +1,33 @@
 import axios from "axios"
+import {productListReduser ,productDetailsReduser} from "../../reduser/productReduser"
 
-export const productRequest = async(dispach, reduser) => {
+
+export const productRequest = ()=> async(dispach) => {
     try {
-        dispach({ type: "PRODUCT_LIST_REQUEST" }, reduser)
+        dispach({ type: "PRODUCT_LIST_REQUEST" })
         
 
         const {data} = await axios.get("http://localhost:5000/api/products")
         
 
-        await dispach({type: "PRODUCT_LIST_SUCCESS", payload: data},reduser)
+        await dispach({type: "PRODUCT_LIST_SUCCESS", payload: data})
     } catch (error) {
-        dispach({type: "PRODUCT_LIST_FAIL", error: "Sorry! Product is not found ..."},reduser)
+        dispach({type: "PRODUCT_LIST_FAIL", error: "Sorry! Product is not found ..."})
     }
 }
+
+export const productDetailsRequest =(action)=> async (dispach)=>{
+    try {
+        dispach({ type: "PRODUCT_Details_REQUEST" })
+        
+
+        const {data} = await axios.get(`http://localhost:5000/api/products/${action}`)
+        
+
+        await dispach({type: "PRODUCT_Details_SUCCESS", payload: data})
+    } catch (error) {
+
+        dispach({type: "PRODUCT_Details_FAIL", error: "Sorry! Product is not found ..."})
+    }
+}
+

@@ -6,14 +6,11 @@ import ProductContainer from '../../ProductContainer/ProductContainer';
 
 const HomePage = () => {
     return (
-        <>
-            <Header/>
-            <main className="py-3">
+        <><main className="py-3">
                 <Container>
                 <ProductContainer/>
                 </Container>
-            </main>
-            <Footer/>
+        </main>
         </>
     );
 };

@@ -14,7 +14,6 @@ const ProductContainer = () => {
     
     const productList = useSelector(state => state.productList)
     const { isLoding, error, products } = productList; 
-    console.log(productList)
     useEffect(() => {
         dispacth(productRequest())
     },[])

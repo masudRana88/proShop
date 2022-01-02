@@ -1,5 +1,4 @@
 import axios from "axios"
-import {productListReduser ,productDetailsReduser} from "../../reduser/productReduser"
 
 
 export const productRequest = ()=> async(dispach) => {

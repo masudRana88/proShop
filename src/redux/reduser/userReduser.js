@@ -3,11 +3,13 @@ export const userLoginReduser = (state={}, action) => {
         case "USER_LOGIN_REQUEST":
             return {...state, isLoding: true};
         case "USER_LOGIN_SUCCESS":
-            return {...state, isLoding: false, userInfo: action.payload, error:false };
+            return {...state, isLoding: false, userInfo: action.payload, error:false, messege: "Login sesscesfull" };
         case "USER_LOGIN_FAIL":
-            return { ...state, isLoding: false, error: action.payload };
+            return { ...state, isLoding: false, error: action.payload,messege: false};
         case "USER_LOGOUT":
-            return {}
+            return { ...state, userInfo: {} }
+        case "USER_LOGIN_MESSEGE_CLEAR":
+            return {...state, messege: false, error: false}
         default: 
             return state
     }

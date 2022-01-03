@@ -1,9 +1,9 @@
 import React from 'react';
-import { useState } from 'react';
+import { useState,useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { Button, Col, Form, FormControl, FormGroup, FormLabel, Row } from 'react-bootstrap';
-import { userLoginRequest } from "../../../redux/action/userAction/userAction";
+import { userLoginRequest,userLoginMessegeClear } from "../../../redux/action/userAction/userAction";
 import FormContainer from '../../FromContainer/FormContainer';
 import Message from '../../Message/Message';
 import Loader from '../../Loader/Loader';
@@ -15,15 +15,20 @@ const LoginPage = () => {
     console.log(password)
     const dispach = useDispatch()
     const userLogin = useSelector(state => state.userLogin);
-    const { isLoding, error, userInfo } = userLogin;
+    const { isLoding, error, userInfo ,messege} = userLogin;
     const formSubmitHendeler = (e) => {
         e.preventDefault()
         dispach(userLoginRequest(email,password))
     }
+
+    useEffect(() => {
+        dispach(userLoginMessegeClear())
+    },[])
     return (
         <FormContainer>
-            <h2 className="text-center">Login</h2>
-            { error && <Message variant="danger">{ error}</Message>}
+            <h2 className="text-center mt-3 mb-3">Login</h2>
+            {error && <Message variant="danger">{error}</Message>}
+            {messege && <Message variant="success">{messege}</Message>}
             {isLoding? <Loader/>:<Form onSubmit={formSubmitHendeler}>
                 {/* take Email */}
             <FormGroup controlId='email' className='mb-3'>

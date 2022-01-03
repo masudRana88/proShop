@@ -6,6 +6,7 @@ import CartPage from './components/Pages/CartPage/CartPage';
 import HomePage from './components/Pages/HomePage/HomePage';
 import LoginPage from './components/Pages/LoginPage/LoginPage';
 import ProductPage from './components/Pages/ProductPage/ProductPage';
+import RegisterPage from './components/Pages/RegisterPage/RegisterPage';
 
 const App = () => {
   return (
@@ -18,6 +19,7 @@ const App = () => {
           <Route path='/cart/:id' element={<CartPage/>} />
           <Route path='/cart' element={<CartPage/>} />
           <Route path='/login' element={<LoginPage/>} />
+          <Route path='/singup' element={<RegisterPage/>} />
       </Routes>
       <Footer/>
     </Router>

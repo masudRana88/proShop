@@ -30,3 +30,17 @@ export const userLoginRequest = (email, password) => async (dispach) => {
         })
     }
 }
+
+
+export const userLogout = () => async (dispach) => {
+    dispach({
+        type: "USER_LOGOUT"
+    })
+    localStorage.setItem("userInfo", JSON.stringify({}))
+}
+
+export const userLoginMessegeClear = () => async (dispach) => {
+    dispach({
+        type: "USER_LOGIN_MESSEGE_CLEAR"
+    })
+}

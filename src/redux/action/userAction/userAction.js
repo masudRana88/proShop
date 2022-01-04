@@ -1,6 +1,6 @@
 import axios from "axios"
 
-
+// Login
 export const userLoginRequest = (email, password) => async (dispach) => {
     try {
         // Login request
@@ -31,7 +31,49 @@ export const userLoginRequest = (email, password) => async (dispach) => {
     }
 }
 
+// Register
+export const userRegisterRequest = (name, email, password) => async (dispach) => {
+    try {
+        const config = {
+             headers: {
+                'Content-Type': 'application/json',
+            }
+        }
+    const { data } = await axios.post("http://localhost:5000/api/register", { name, email, password }, config)
+        dispach({
+            type: "USER_REGISTER_REQUEST",
+            payload: {
+                isLoding: true,
+                error: false,
+                message: false,
+                userInfo: {}
+            }
+        })
+        
+        dispach({
+            type: "USER_REGISTER_SUCCESS",
+            payload:  {
+                isLoding: false,
+                error: false,
+                message: "successfully Register",
+                userInfo: data
+            }
+        })
+        localStorage.setItem("userInfo", JSON.stringify(data))
+    } catch (error) {
+         dispach({
+            type: "USER_REGISTER_FAIL",
+            payload:  {
+                isLoding: false,
+                error: error.response.data.message ? error.response.data.message : {},
+                message: false,
+                userInfo: {}
+            }
+        })
+    }
+}
 
+// Logout
 export const userLogout = () => async (dispach) => {
     dispach({
         type: "USER_LOGOUT"

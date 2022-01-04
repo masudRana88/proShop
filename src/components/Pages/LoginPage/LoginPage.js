@@ -11,8 +11,6 @@ import Loader from '../../Loader/Loader';
 const LoginPage = () => {
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
-    console.log(email)
-    console.log(password)
     const dispach = useDispatch()
     const userLogin = useSelector(state => state.userLogin);
     const { isLoding, error, userInfo ,messege} = userLogin;

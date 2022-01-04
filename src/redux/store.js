@@ -1,6 +1,6 @@
 import { createStore, combineReducers,applyMiddleware, compose } from "redux"
 import { productListReduser, productDetailsReduser } from "./reduser/productReduser"
-import {userLoginReduser} from "../redux/reduser/userReduser.js"
+import {userLoginReduser, userRegisterReduser} from "../redux/reduser/userReduser.js"
 import thunk from "redux-thunk"
 import { addToCartReducer } from "./reduser/cartReduser";
 
@@ -10,7 +10,8 @@ const reduser = combineReducers({
     productList: productListReduser,
     productDetails: productDetailsReduser,
     cart: addToCartReducer,
-    userLogin : userLoginReduser
+    userLogin: userLoginReduser,
+    userRegister: userRegisterReduser
 });
 
 const cardItemFromLocalStorage = localStorage.getItem("cartItem") ? JSON.parse(localStorage.getItem("cartItem")) : []

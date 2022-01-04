@@ -10,7 +10,6 @@ import { userLogout } from '../../redux/action/userAction/userAction';
 const Header = () => {
     const userLogin = useSelector(state => state.userLogin)
     const {userInfo} = userLogin
-    console.log(userInfo)
     const dispach = useDispatch()
     const hendleLogout = () => {
         dispach(userLogout())

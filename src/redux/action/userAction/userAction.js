@@ -73,6 +73,73 @@ export const userRegisterRequest = (name, email, password) => async (dispach) =>
     }
 }
 
+// Get Profile 
+export const getUserProfile = (user) => async (dispach, getState) => {
+    try {
+        dispach({
+            type: "USER_PROFILE_REQUEST",
+            payload: {
+                isLoding: true,
+                error: false,
+                message: false,
+            }
+        });
+        
+        const userInfo = JSON.parse(localStorage.getItem('userInfo'))
+        const token = "Bearer "+ userInfo.token
+        const config = {
+             headers: {
+            'Content-Type': 'application/json',
+            token
+            }
+        }
+        const { data } = await axios.get("http://localhost:5000/api/profile", config)
+        dispach({
+            type: "USER_PROFILE_SUCCESS",
+            payload:  {
+                ...data,
+                isLoding: false,
+                error: false,
+            }
+        })
+    } catch (error) {
+         dispach({
+            type: "USER_PROFILE_FAIL",
+             payload: {
+                 error: "user is not found !"
+            }
+        })
+    }
+}
+// Update Profile 
+export const updateUserProfile = (email, name, password) => async (dispach,getState) => {
+    try {
+        const userInfo = JSON.parse(localStorage.getItem('userInfo'))
+        const token = "Bearer "+ userInfo.token
+        const config = {
+             headers: {
+            'Content-Type': 'application/json',
+            token
+            }
+        }
+        const { data } = await axios.post("http://localhost:5000/api/profile", { email, name, password }, config)
+        
+        dispach({
+            type: "USER_PROFILE_UPDATE_SUCCESS",
+            payload: data
+        })
+        localStorage.setItem("userInfo", JSON.stringify(data))
+
+    } catch (error) {
+        dispach({
+            type: "USER_PROFILE_UPDATE_FAIL",
+            payload: {
+                message: false,
+                error : "Profile Update Fail!",
+            }
+        })
+    }
+}
 // Logout
 export const userLogout = () => async (dispach) => {
     dispach({

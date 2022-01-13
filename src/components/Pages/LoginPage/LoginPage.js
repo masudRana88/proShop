@@ -1,7 +1,7 @@
 import React from 'react';
 import { useState,useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { Button, Col, Form, FormControl, FormGroup, FormLabel, Row } from 'react-bootstrap';
 import { userLoginRequest,userLoginMessegeClear } from "../../../redux/action/userAction/userAction";
 import FormContainer from '../../FromContainer/FormContainer';
@@ -12,16 +12,18 @@ const LoginPage = () => {
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
     const dispach = useDispatch()
+    const navigate = useNavigate()
+    
     const userLogin = useSelector(state => state.userLogin);
     const { isLoding, error, userInfo ,messege} = userLogin;
     const formSubmitHendeler = (e) => {
         e.preventDefault()
         dispach(userLoginRequest(email,password))
     }
-
+    
     useEffect(() => {
         dispach(userLoginMessegeClear())
-    },[])
+    },[navigate])
     return (
         <FormContainer>
             <h2 className="text-center mt-3 mb-3">Login</h2>

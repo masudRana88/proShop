@@ -6,6 +6,7 @@ import CartPage from './components/Pages/CartPage/CartPage';
 import HomePage from './components/Pages/HomePage/HomePage';
 import LoginPage from './components/Pages/LoginPage/LoginPage';
 import ProductPage from './components/Pages/ProductPage/ProductPage';
+import ProfilePage from './components/Pages/ProfilePage/ProfilePage';
 import RegisterPage from './components/Pages/RegisterPage/RegisterPage';
 
 const App = () => {
@@ -20,6 +21,7 @@ const App = () => {
           <Route path='/cart' element={<CartPage/>} />
           <Route path='/login' element={<LoginPage/>} />
           <Route path='/singup' element={<RegisterPage/>} />
+          <Route path='/profile' element={<ProfilePage/>} />
       </Routes>
       <Footer/>
     </Router>

@@ -22,7 +22,6 @@ const CartPage = () => {
     const hendleIdemRemove = (id) => {
         dispach(removeToCart(id))
     }
-    console.log(cartItem)
     useEffect(() => {
         if (id) {
             dispatch(addToCart(id,qty))

@@ -1,4 +1,4 @@
-export const addToCartReducer = (state={cartItem: []}, action) => {
+export const addToCartReducer = (state={cartItem: [],shippingAddress: {}}, action) => {
     switch (action.type) {
         case "ADD_TO_CART":
             const item = action.payload;
@@ -20,6 +20,10 @@ export const addToCartReducer = (state={cartItem: []}, action) => {
              return {
                 ...state,
                 cartItem: state.cartItem.filter(x => x.product !== action.payload)
+            }
+        case "ADD_SHIPPING_ADDRESS":
+            return {
+                ...state, shippingAddress : action.payload
             }
         default:
             return state

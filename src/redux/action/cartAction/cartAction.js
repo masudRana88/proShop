@@ -1,5 +1,7 @@
 import axios from "axios"
 
+
+// Add to card
 export const addToCart = (id, qty) => async (dispach, getState) => {
     const {data} = await axios.get(`http://localhost:5000/api/products/${id}`)
 
@@ -19,11 +21,20 @@ export const addToCart = (id, qty) => async (dispach, getState) => {
 }
 
 
-
+// Remove to card
 export const removeToCart = (id) => async (dispach, getState) => {
     dispach({
         type: "REMOVE_TO_CART",
         payload: id
     })
     localStorage.setItem("cartItem", JSON.stringify(getState().cart.cartItem))
+}
+
+// Add shiping addtess
+export const addShippingAddress = (data) => async (dispach) => {
+    dispach({
+        type: "ADD_SHIPPING_ADDRESS",
+        payload : data
+    })
+    localStorage.setItem("shippingAddress", JSON.stringify(data))
 }

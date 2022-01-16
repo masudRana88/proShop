@@ -38,3 +38,12 @@ export const addShippingAddress = (data) => async (dispach) => {
     })
     localStorage.setItem("shippingAddress", JSON.stringify(data))
 }
+
+// Add PaymentMethode 
+export const addPaymentMetod = (paymentMethod) => async (dispach) => {
+    dispach({
+        type: "ADD_PAYMENT_METHODE",
+        payload : paymentMethod
+    })
+    console.log(paymentMethod)
+}

@@ -28,7 +28,7 @@ const ShopingPage = () => {
     }
     return (
         <FormContainer>
-            <ChackOut step1/>
+            <ChackOut step1 step2/>
             <h2 className='mt-4 mb-3'>Shopping</h2>
             <Form onSubmit={hendleShipping}>
                 <FormGroup controlId='address' className='mb-3'>

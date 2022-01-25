@@ -3,7 +3,7 @@ import { productListReduser, productDetailsReduser } from "./reduser/productRedu
 import {userLoginReduser, userProfile, userRegisterReduser,updateUserProfile} from "../redux/reduser/userReduser.js"
 import thunk from "redux-thunk"
 import { addToCartReducer } from "./reduser/cartReduser";
-import {orderSavaToDb} from './reduser/orderReduser'
+import {orderSavaToDb,getOrder,orderPayReducer} from './reduser/orderReduser'
 
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
@@ -14,7 +14,9 @@ const reduser = combineReducers({
     userLogin: userLoginReduser,
     userRegister: userRegisterReduser,
     userProfile: userProfile,
-    orderCreate : orderSavaToDb
+    orderCreate: orderSavaToDb,
+    orderItem: getOrder,
+    payDetails : orderPayReducer
 });
 
 const cardItemFromLocalStorage = localStorage.getItem("cartItem") ? JSON.parse(localStorage.getItem("cartItem")) : []

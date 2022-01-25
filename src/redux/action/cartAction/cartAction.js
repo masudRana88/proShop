@@ -29,6 +29,13 @@ export const removeToCart = (id) => async (dispach, getState) => {
     })
     localStorage.setItem("cartItem", JSON.stringify(getState().cart.cartItem))
 }
+// Clear Cart
+export const clearCart = () => async (dichpach) => {
+    localStorage.setItem("cartItem", "[]");
+    dichpach({
+        type: "CLEAR_CART",
+    })
+}
 
 // Add shiping addtess
 export const addShippingAddress = (data) => async (dispach) => {

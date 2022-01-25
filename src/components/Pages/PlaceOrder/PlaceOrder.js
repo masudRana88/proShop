@@ -3,9 +3,8 @@ import { Button, Col, Container, Image, ListGroup, Row } from 'react-bootstrap';
 import { useSelector } from 'react-redux';
 import { Link, useNavigate } from 'react-router-dom';
 import ChackOut from '../../ChackOut/ChackOut';
-import {orderSend, removeError} from '../../../redux/action/OrderAction/OrderAction'
+import {orderSend, removeOrderToClintSide} from '../../../redux/action/OrderAction/OrderAction'
 import { useDispatch } from 'react-redux';
-import Loader from '../../Loader/Loader';
 import { useEffect } from 'react';
 
 
@@ -28,24 +27,26 @@ const PlaceOrder = () => {
     cart.total = fixTowDesimal(Number(cart.item) + Number(cart.shipping) + Number(cart.tax))
 
     const dispach = useDispatch()
-    const hendlePlaceOrder = (e) => {
+    const hendlePlaceOrder = async(e) => {
         e.preventDefault()
-        dispach(orderSend({
+        await dispach(orderSend({
             shippingAddress,
             paymentMethod,
             textPrice: cart.tax,
             totalPrice: cart.total,
             orderItem: cartItem,
             itemPrice : cart.item,
-            shippingPrice:  cart.shipping
+            shippingPrice: cart.shipping,
         }))
     }
     useEffect(() => {
-        dispach(removeError())
         if (success) {
            navigate(`/order/${order._id}`)
         }
-    },[success])
+        if (cartItem.length === 0) {
+            navigate(`/cart`)
+        }
+    },[success,cartItem])
     return (
         <Container>
             <ChackOut step1 step2 step3 step4/>
@@ -78,7 +79,7 @@ const PlaceOrder = () => {
                                     <Link to={`/product/${item.product}`}>{item.name}</Link>
                                 </Col>
                                 <Col md={4}>
-                                    {item.qty} X ${item.price} = ${item.qty * item.price}
+                                    {item.qty} X ${item.price} = ${(item.qty * item.price).toFixed(2)}
                                 </Col>
                             </Row>
                             </ListGroup.Item>
@@ -88,7 +89,7 @@ const PlaceOrder = () => {
             </ListGroup>
           </Col>
           <Col md={4}>
-              {orderCreate.isLoding?<Loader/> :<ListGroup>
+              <ListGroup>
                 <ListGroup.Item>
                     <h2>Order Summary</h2>
                 </ListGroup.Item>
@@ -135,7 +136,7 @@ const PlaceOrder = () => {
                 <ListGroup.Item>
                     <Button className='w-100' onClick={hendlePlaceOrder}disabled={orderCreate&&orderCreate.message}>Place Order</Button>
                 </ListGroup.Item>
-            </ListGroup>}
+            </ListGroup>
           </Col>
         </Row>
         </Container>

@@ -5,6 +5,7 @@ import Header from './components/Header/Header';
 import CartPage from './components/Pages/CartPage/CartPage';
 import HomePage from './components/Pages/HomePage/HomePage';
 import LoginPage from './components/Pages/LoginPage/LoginPage';
+import OrderPage from './components/Pages/OrderPage/OrderPage';
 import PaymentPage from './components/Pages/PaymentPage/PaymentPage';
 import PlaceOrder from './components/Pages/PlaceOrder/PlaceOrder';
 import ProductPage from './components/Pages/ProductPage/ProductPage';
@@ -28,6 +29,7 @@ const App = () => {
           <Route path='/shipping' element={<ShopingPage/>} />
           <Route path='/payment' element={<PaymentPage/>} />
           <Route path='/place-order' element={<PlaceOrder/>} />
+          <Route path='/order/:id' element={<OrderPage/>} />
       </Routes>
       <Footer/>
     </Router>

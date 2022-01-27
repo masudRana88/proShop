@@ -1,5 +1,5 @@
 // Login
-export const userLoginReduser = (state = {}, action) => {
+export const userLoginReduser = (state = {userInfo:{}}, action) => {
     switch (action.type) {
         case "USER_LOGIN_REQUEST":
             return {...state, isLoding: true, error: false};

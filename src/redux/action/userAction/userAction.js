@@ -1,7 +1,7 @@
 import axios from "axios"
 
 // Login
-export const userLoginRequest = (email, password) => async (dispach) => {
+export const userLoginRequest = (email, password,goBack) => async (dispach) => {
     try {
         // Login request
         dispach({
@@ -22,7 +22,7 @@ export const userLoginRequest = (email, password) => async (dispach) => {
         })
 
         localStorage.setItem("userInfo", JSON.stringify(data))
-
+        goBack()
     } catch (error) {
         dispach({
             type: "USER_LOGIN_FAIL",

@@ -27,7 +27,7 @@ export const orderSend = (order) => async(dichpach) => {
     
 }
 
-
+// Get order by Order Id
 export const getOrderById = (id) => async (dispatch) => {
     
     try {   
@@ -55,7 +55,40 @@ export const getOrderById = (id) => async (dispatch) => {
     }
 
 }
-// 
+
+// Get Order By User Id
+export const getOrderByUserId = () => async (dichpach) => {
+    try {
+    dichpach({
+        type: "USER_ORDER_GET_REQUEST"
+    })
+
+
+    const userInfo = JSON.parse(localStorage.getItem('userInfo'))
+            const token = "Bearer "+ userInfo.token
+            const config = {
+                headers: {
+                'Content-Type': 'application/json',
+                token
+                }
+            } 
+
+    const {data} = await axios.get("http://localhost:5000/api/order/user/order",config)
+    
+    dichpach({
+        type: "USER_ORDER_GET_SUCCESS",
+        payload: data
+    })
+
+    } catch (error) {
+        dichpach({
+        type: "USER_ORDER_GET_FAIL"
+    })
+    }
+}
+
+
+// Update Order To PAY
 export const orderPayAction = (id,details) => async (dichpach) => {
     try {
         dichpach({

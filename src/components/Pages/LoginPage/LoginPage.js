@@ -7,19 +7,28 @@ import { userLoginRequest,userLoginMessegeClear } from "../../../redux/action/us
 import FormContainer from '../../FromContainer/FormContainer';
 import Message from '../../Message/Message';
 import Loader from '../../Loader/Loader';
+import { useLocation } from 'react-router-dom';
 
 const LoginPage = () => {
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
     const dispach = useDispatch()
     const navigate = useNavigate()
-    
+
+    const location = useLocation()
+    let from = location.state?.from?.pathname || "/";
     const userLogin = useSelector(state => state.userLogin);
-    const { isLoding, error, userInfo ,messege} = userLogin;
+
+    const { isLoding, error, userInfo, messege } = userLogin;
+
+    const goBack = () => {
+        navigate(`${from}`)
+    }
     const formSubmitHendeler = (e) => {
         e.preventDefault()
-        dispach(userLoginRequest(email,password))
+        dispach(userLoginRequest(email, password,goBack))
     }
+
     
     useEffect(() => {
         dispach(userLoginMessegeClear())

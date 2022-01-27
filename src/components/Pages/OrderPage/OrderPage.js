@@ -21,7 +21,6 @@ const OrderPage = () => {
     const {orderPay} = useSelector(state=> state.payDetails)
     useEffect(() => {
         dispatch(getOrderById(id))
-        console.log("useEffect")
     },[id,orderPay])
     return (
        <Container>

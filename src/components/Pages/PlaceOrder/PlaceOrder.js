@@ -6,6 +6,7 @@ import ChackOut from '../../ChackOut/ChackOut';
 import {orderSend, removeOrderToClintSide} from '../../../redux/action/OrderAction/OrderAction'
 import { useDispatch } from 'react-redux';
 import { useEffect } from 'react';
+import { clearCart } from '../../../redux/action/cartAction/cartAction';
 
 
 const PlaceOrder = () => {
@@ -38,6 +39,8 @@ const PlaceOrder = () => {
             itemPrice : cart.item,
             shippingPrice: cart.shipping,
         }))
+        dispach(clearCart())
+        dispach(removeOrderToClintSide())
     }
     useEffect(() => {
         if (success) {

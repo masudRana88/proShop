@@ -1,4 +1,6 @@
-export const orderSavaToDb = (state={}, action) => {
+// Create Order And Send to DB
+
+export const orderSavaToDb = (state = {}, action) => {
   switch (action.type) {
     case "ORDER_SEND_TO_DB":
       return {
@@ -31,6 +33,7 @@ export const orderSavaToDb = (state={}, action) => {
     }
 }
 
+// Get Order by Id name
 export const getOrder = (state={}, action) => {
   
   switch (action.type) {
@@ -56,6 +59,21 @@ export const orderPayReducer = (state={orderPay:{}}, action) => {
       return {isLoding: false, error: false, orderPay: action.payload }
     case "ORDER_PAY_FAIL":
       return {isLoding: false, error: true }
+    default:
+      return {...state}
+  }
+
+}
+
+export const getUserOrderReducer = (state={order:{}},action) => {
+  
+  switch (action.type) {
+    case "USER_ORDER_GET_REQUEST":
+      return {...state, isLoding: true, error: false}
+    case "USER_ORDER_GET_SUCCESS":
+      return {...state, isLoding: false, error: false,order: action.payload}
+    case "USER_ORDER_GET_FAIL":
+      return {...state, isLoding: false, error: true}
     default:
       return {...state}
   }

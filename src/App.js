@@ -12,6 +12,7 @@ import ProductPage from './components/Pages/ProductPage/ProductPage';
 import ProfilePage from './components/Pages/ProfilePage/ProfilePage';
 import RegisterPage from './components/Pages/RegisterPage/RegisterPage';
 import ShopingPage from './components/Pages/ShopingPage/ShopingPage';
+import PrivateRoute from './components/PrivateRoute/PrivateRoute';
 
 const App = () => {
   return (
@@ -25,11 +26,11 @@ const App = () => {
           <Route path='/cart' element={<CartPage/>} />
           <Route path='/login' element={<LoginPage/>} />
           <Route path='/singup' element={<RegisterPage/>} />
-          <Route path='/profile' element={<ProfilePage/>} />
-          <Route path='/shipping' element={<ShopingPage/>} />
-          <Route path='/payment' element={<PaymentPage/>} />
-          <Route path='/place-order' element={<PlaceOrder/>} />
-          <Route path='/order/:id' element={<OrderPage/>} />
+          <Route path='/profile' element={<PrivateRoute><ProfilePage/></PrivateRoute> } />
+          <Route path='/shipping' element={<PrivateRoute><ShopingPage/></PrivateRoute>} />
+          <Route path='/payment' element={<PrivateRoute><PaymentPage/></PrivateRoute>} />
+          <Route path='/place-order' element={<PrivateRoute><PlaceOrder/></PrivateRoute>} />
+          <Route path='/order/:id' element={<PrivateRoute><OrderPage/></PrivateRoute>} />
       </Routes>
       <Footer/>
     </Router>

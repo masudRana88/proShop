@@ -37,7 +37,15 @@ const Header = () => {
                     </LinkContainer>
                     <NavDropdown.Item onClick={hendleLogout}>Log Out</NavDropdown.Item>
                 </NavDropdown>
-                ) : <Link to="/login"><a className="nav-link"> <i className="fas fa-user"></i> Sing in</a></Link>}                
+                ) : <Link to="/login"><a className="nav-link"> <i className="fas fa-user"></i> Sing in</a></Link>}
+
+                {userInfo.isAdmin&&
+                <NavDropdown  title="Admin Manu">
+                    <LinkContainer to="/users">
+                        <NavDropdown.Item>User List</NavDropdown.Item>
+                    </LinkContainer>
+                </NavDropdown>
+                }            
             </Nav>
 
             </Navbar.Collapse>

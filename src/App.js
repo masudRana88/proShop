@@ -1,5 +1,6 @@
 import React from 'react';
 import { BrowserRouter as Router,Routes,Route,Link} from "react-router-dom";
+import AdminRoutes from './components/AdminRoutes/AdminRoutes';
 import Footer from './components/Footer/Footer';
 import Header from './components/Header/Header';
 import CartPage from './components/Pages/CartPage/CartPage';
@@ -12,6 +13,7 @@ import ProductPage from './components/Pages/ProductPage/ProductPage';
 import ProfilePage from './components/Pages/ProfilePage/ProfilePage';
 import RegisterPage from './components/Pages/RegisterPage/RegisterPage';
 import ShopingPage from './components/Pages/ShopingPage/ShopingPage';
+import UserListPage from './components/Pages/UserListPage/UserListPage';
 import PrivateRoute from './components/PrivateRoute/PrivateRoute';
 
 const App = () => {
@@ -30,7 +32,9 @@ const App = () => {
           <Route path='/shipping' element={<PrivateRoute><ShopingPage/></PrivateRoute>} />
           <Route path='/payment' element={<PrivateRoute><PaymentPage/></PrivateRoute>} />
           <Route path='/place-order' element={<PrivateRoute><PlaceOrder/></PrivateRoute>} />
-          <Route path='/order/:id' element={<PrivateRoute><OrderPage/></PrivateRoute>} />
+        <Route path='/order/:id' element={<PrivateRoute><OrderPage /></PrivateRoute>} />
+        <Route path='/users' element={<AdminRoutes><UserListPage/></AdminRoutes>} />
+        
       </Routes>
       <Footer/>
     </Router>

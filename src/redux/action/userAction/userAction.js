@@ -14,7 +14,7 @@ export const userLoginRequest = (email, password,goBack) => async (dispach) => {
             }
         }
 
-        const {data} = await axios.post("http://localhost:5000/api/login",{email, password},config)
+        const {data} = await axios.post("http://localhost:5000/api/user/login",{email, password},config)
         //Login success 
         dispach({
             type: "USER_LOGIN_SUCCESS",
@@ -39,7 +39,7 @@ export const userRegisterRequest = (name, email, password) => async (dispach) =>
                 'Content-Type': 'application/json',
             }
         }
-    const { data } = await axios.post("http://localhost:5000/api/register", { name, email, password }, config)
+    const { data } = await axios.post("http://localhost:5000/api/user/register", { name, email, password }, config)
         dispach({
             type: "USER_REGISTER_REQUEST",
             payload: {
@@ -73,7 +73,7 @@ export const userRegisterRequest = (name, email, password) => async (dispach) =>
     }
 }
 
-// Get Profile 
+// Get user Profile 
 export const getUserProfile = (user) => async (dispach, getState) => {
     try {
         dispach({
@@ -93,7 +93,7 @@ export const getUserProfile = (user) => async (dispach, getState) => {
             token
             }
         }
-        const { data } = await axios.get("http://localhost:5000/api/profile", config)
+        const { data } = await axios.get("http://localhost:5000/api/user/profile", config)
         dispach({
             type: "USER_PROFILE_SUCCESS",
             payload:  {
@@ -111,6 +111,33 @@ export const getUserProfile = (user) => async (dispach, getState) => {
         })
     }
 }
+
+// Get User List
+export const getUserList = () => async (dispach) => {
+    try {
+        dispach({
+            type : "USER_LIST_REQUEST"
+        })
+        const userInfo = JSON.parse(localStorage.getItem('userInfo'))
+        const token = "Bearer "+ userInfo.token
+        const config = {
+             headers: {
+            'Content-Type': 'application/json',
+            token
+            }
+        }
+        const { data } =await axios.get("http://localhost:5000/api/user", config)
+        console.log(data)
+        dispach({
+            type: "USER_LIST_SUCCESS",
+            payload : data
+        })
+    } catch (error) {
+        dispach({
+            type: "USER_LIST_FAIL"
+        })
+    }
+}
 // Update Profile 
 export const updateUserProfile = (email, name, password) => async (dispach,getState) => {
     try {
@@ -122,7 +149,7 @@ export const updateUserProfile = (email, name, password) => async (dispach,getSt
             token
             }
         }
-        const { data } = await axios.post("http://localhost:5000/api/profile", { email, name, password }, config)
+        const { data } = await axios.post("http://localhost:5000/api/user/profile", { email, name, password }, config)
         
         dispach({
             type: "USER_PROFILE_UPDATE_SUCCESS",
@@ -144,6 +171,9 @@ export const updateUserProfile = (email, name, password) => async (dispach,getSt
 export const userLogout = () => async (dispach) => {
     dispach({
         type: "USER_LOGOUT"
+    })
+    dispach({
+        type: "USER_LIST_RESET"
     })
     localStorage.setItem("userInfo", JSON.stringify({}))
 }

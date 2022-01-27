@@ -1,6 +1,6 @@
 import { createStore, combineReducers,applyMiddleware, compose } from "redux"
 import { productListReduser, productDetailsReduser } from "./reduser/productReduser"
-import {userLoginReduser, userProfile, userRegisterReduser,updateUserProfile} from "../redux/reduser/userReduser.js"
+import {userLoginReduser, userProfile, userRegisterReduser,userListReducer} from "../redux/reduser/userReduser.js"
 import thunk from "redux-thunk"
 import { addToCartReducer } from "./reduser/cartReduser";
 import {orderSavaToDb,getOrder,getUserOrderReducer,orderPayReducer} from './reduser/orderReduser'
@@ -14,6 +14,7 @@ const reduser = combineReducers({
     userLogin: userLoginReduser,
     userRegister: userRegisterReduser,
     userProfile: userProfile,
+    usersList : userListReducer,
     orderCreate: orderSavaToDb,
     orderItem: getOrder,
     payDetails: orderPayReducer,

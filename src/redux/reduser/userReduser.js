@@ -34,6 +34,7 @@ export const userRegisterReduser = (state = {}, action) => {
             return {...state}
     }
 }
+// get user profile
 export const userProfile = (state = {}, action) => {
     switch (action.type) {
         case "USER_PROFILE_REQUEST":
@@ -44,5 +45,21 @@ export const userProfile = (state = {}, action) => {
             return { ...state, user: action.payload };
         default:
             return{...state};
+    }
+}
+
+// get users List
+export const userListReducer = (state = {users:{}}, action) => {
+    switch (action.type) {
+        case "USER_LIST_REQUEST":
+            return {...state, isloding: true, error: false}
+        case "USER_LIST_SUCCESS":
+            return {...state, isloding: false, error: false,users: action.payload}
+        case "USER_LIST_FAIL":
+            return {...state, isloding: false, error: true}
+        case "USER_LIST_RESET":
+            return {...state, isloding: false, error: false,users:{} }
+        default:
+            return {...state};
     }
 }

@@ -127,7 +127,7 @@ export const getUserList = () => async (dispach) => {
             }
         }
         const { data } =await axios.get("http://localhost:5000/api/user", config)
-        console.log(data)
+        // console.log(data)
         dispach({
             type: "USER_LIST_SUCCESS",
             payload : data
@@ -138,6 +138,36 @@ export const getUserList = () => async (dispach) => {
         })
     }
 }
+
+// DELETE user
+export const deleteUser = (id) => async (dispach) => {
+    try {
+        dispach({
+            type: "USER_DELETE_REQUEST"
+        })
+        console.log(id)
+        const userInfo = JSON.parse(localStorage.getItem('userInfo'))
+        const token = "Bearer "+ userInfo.token
+        const config = {
+             headers: {
+            'Content-Type': 'application/json',
+            token
+            }
+        }
+        const { data } = await axios.delete(`http://localhost:5000/api/user/${id}`, config)
+        console.log(id)
+        dispach({
+            type: "USER_DELETE_SUCCESS",
+            payload: data
+        })
+
+    } catch (error) {
+        dispach({
+            type: "USER_DELETE_FAIL"
+        })
+    }
+}
+
 // Update Profile 
 export const updateUserProfile = (email, name, password) => async (dispach,getState) => {
     try {

@@ -85,7 +85,7 @@ const ProfilePage = () => {
                         </tr>
                     </thead>
                     <tbody>
-                       {order.map(item=><tr>
+                       {order.map(item=><tr key={item._id}>
                            <td>{ item._id}</td>
                            <td>{ item.createdAt.slice(0, 10)}</td>
                            <td>{ item.totalPrice}</td>
@@ -96,7 +96,7 @@ const ProfilePage = () => {
                     </tbody>
                 </Table>: userOrder.isLoding ?
                 <Loader/>: !order.length &&
-                <Message/>
+                <Message>Empty</Message>
                 }
                 
             </Col>

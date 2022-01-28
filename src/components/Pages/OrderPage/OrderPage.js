@@ -23,7 +23,7 @@ const OrderPage = () => {
         dispatch(getOrderById(id))
     },[id,orderPay])
     return (
-       <Container>
+       <Container >
         <Row>
           <Col md={8} className='mt-4'>
             <ListGroup variant='flush'>

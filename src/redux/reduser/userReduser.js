@@ -49,16 +49,22 @@ export const userProfile = (state = {}, action) => {
 }
 
 // get users List
-export const userListReducer = (state = {users:{}}, action) => {
+export const userListReducer = (state = {users:[]}, action) => {
     switch (action.type) {
         case "USER_LIST_REQUEST":
             return {...state, isloding: true, error: false}
         case "USER_LIST_SUCCESS":
             return {...state, isloding: false, error: false,users: action.payload}
         case "USER_LIST_FAIL":
-            return {...state, isloding: false, error: true}
+            return {...state, isloding: false, error: "User can Not be Loed"}
         case "USER_LIST_RESET":
-            return {...state, isloding: false, error: false,users:{} }
+            return { ...state, isloding: false, error: false, users: [] }
+        case "USER_DELETE_REQUEST":
+            return { ...state, isloding: true, error: false }
+        case "USER_DELETE_SUCCESS":
+            return { ...state, isloding: false, error: false, users: action.payload }
+        case "USER_DELETE_FAIL":
+            return {...state, isloding: false, error: "User Can not be delete"}
         default:
             return {...state};
     }

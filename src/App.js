@@ -14,6 +14,7 @@ import ProfilePage from './components/Pages/ProfilePage/ProfilePage';
 import RegisterPage from './components/Pages/RegisterPage/RegisterPage';
 import ShopingPage from './components/Pages/ShopingPage/ShopingPage';
 import UserListPage from './components/Pages/UserListPage/UserListPage';
+import UsersEditPage from './components/Pages/UsersEditPage/UsersEditPage';
 import PrivateRoute from './components/PrivateRoute/PrivateRoute';
 
 const App = () => {
@@ -34,6 +35,7 @@ const App = () => {
           <Route path='/place-order' element={<PrivateRoute><PlaceOrder/></PrivateRoute>} />
         <Route path='/order/:id' element={<PrivateRoute><OrderPage /></PrivateRoute>} />
         <Route path='/users' element={<AdminRoutes><UserListPage/></AdminRoutes>} />
+        <Route path='/users/:id/edit' element={<AdminRoutes><UsersEditPage/></AdminRoutes>} />
         
       </Routes>
       <Footer/>

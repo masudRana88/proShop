@@ -145,7 +145,7 @@ export const deleteUser = (id) => async (dispach) => {
         dispach({
             type: "USER_DELETE_REQUEST"
         })
-        console.log(id)
+        // get jwt token
         const userInfo = JSON.parse(localStorage.getItem('userInfo'))
         const token = "Bearer "+ userInfo.token
         const config = {
@@ -155,7 +155,6 @@ export const deleteUser = (id) => async (dispach) => {
             }
         }
         const { data } = await axios.delete(`http://localhost:5000/api/user/${id}`, config)
-        console.log(id)
         dispach({
             type: "USER_DELETE_SUCCESS",
             payload: data
@@ -167,6 +166,37 @@ export const deleteUser = (id) => async (dispach) => {
         })
     }
 }
+
+// EDIT user
+export const editUser = (user,setMessege) => async (dispach) => {
+    try {
+        dispach({
+            type: "USER_EDIT_REQUEST"
+        })
+        console.log(user.id)
+        // get jwt token
+        const userInfo = JSON.parse(localStorage.getItem('userInfo'))
+        const token = "Bearer "+ userInfo.token
+        const config = {
+             headers: {
+            'Content-Type': 'application/json',
+            token
+            }
+        }
+        const { data } = await axios.put(`http://localhost:5000/api/user/${user.id}`,user, config)
+        dispach({
+            type: "USER_EDIT_SUCCESS",
+            payload: data
+        })
+        setMessege(true)
+    } catch (error) {
+        dispach({
+            type: "USER_EDIT_FAIL"
+        })
+        setMessege(false)
+    }
+}
+
 
 // Update Profile 
 export const updateUserProfile = (email, name, password) => async (dispach,getState) => {

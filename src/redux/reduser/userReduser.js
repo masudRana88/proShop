@@ -51,6 +51,7 @@ export const userProfile = (state = {}, action) => {
 // get users List
 export const userListReducer = (state = {users:[]}, action) => {
     switch (action.type) {
+        // get user list
         case "USER_LIST_REQUEST":
             return {...state, isloding: true, error: false}
         case "USER_LIST_SUCCESS":
@@ -59,12 +60,20 @@ export const userListReducer = (state = {users:[]}, action) => {
             return {...state, isloding: false, error: "User can Not be Loed"}
         case "USER_LIST_RESET":
             return { ...state, isloding: false, error: false, users: [] }
+        // delete user
         case "USER_DELETE_REQUEST":
             return { ...state, isloding: true, error: false }
         case "USER_DELETE_SUCCESS":
             return { ...state, isloding: false, error: false, users: action.payload }
         case "USER_DELETE_FAIL":
-            return {...state, isloding: false, error: "User Can not be delete"}
+            return { ...state, isloding: false, error: "User Can not be delete" }
+        // edit user
+        case "USER_EDIT_REQUEST":
+            return { ...state, isloding: true, error: false }
+        case "USER_EDIT_SUCCESS":
+            return { ...state, isloding: false, error: false, users: action.payload }
+        case "USER_EDIT_FAIL":
+            return { ...state, isloding: false, error: "User Can not be delete" }
         default:
             return {...state};
     }

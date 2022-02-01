@@ -5,7 +5,13 @@ export const productListReduser = (state= {products : []}, action) => {
         case "PRODUCT_LIST_SUCCESS":
             return {...state, isLoding: false, products: action.payload };
         case "PRODUCT_LIST_FAIL":
-            return {...state, isLoding: false, products: [], error: action.error };
+            return { ...state, isLoding: false, products: [], error: action.error };
+        case "ADD_PRODUCT_REQUEST":
+            return { ...state, isLoding: true, error: false };
+        case "ADD_PRODUCT_SUCCESS":
+            return { ...state, isLoding: false, error: false, products: action.payload };
+        case "ADD_PRODUCT_FAIL":
+            return { ...state, isLoding: false, error: true};
         default: 
             return state
     }

@@ -5,10 +5,11 @@ import {Button, Container,Table} from "react-bootstrap"
 import { deleteUser, getUserList } from '../../../redux/action/userAction/userAction';
 import Loader from '../../Loader/Loader';
 import LinkContainer from '../../LinkContainer/LinkContainer';
+import { useNavigate } from 'react-router-dom';
 
 const UserListPage = () => {
     const dispach = useDispatch()
-
+    const navigate = useNavigate()
     const userList = useSelector(state => state.usersList)
     const { users } = userList
     // Hendle user Delete
@@ -23,7 +24,7 @@ const UserListPage = () => {
         dispach(getUserList())
     },[dispach])
     return (
-        <Container fluid>
+        <Container >
             <h2 className='text-center mt-3'>All Users</h2>
             {userList.isLoding?<Loader/>:
             <Table striped bordered hover responsive size="sm" className='mb-4'>
@@ -43,9 +44,9 @@ const UserListPage = () => {
                         <td>{ item.email}</td>
                         <td className='text-center'>{item.isAdmin?<i class="fas fa-check ps-icon text-success"></i>:<i class="fas fa-times ps-icon text-danger"></i> }</td>
                     <td>
-                        <LinkContainer to={`/users/${item._id}/edit`}>
-                            <span><i class="far fa-edit ps-icon text-info"></i></span>
-                        </LinkContainer>
+                        <button className='btn btn-sm' onClick={()=>navigate(`/admin/users/${item._id}/edit`)}>
+                            <i class="far fa-edit ps-icon text-info"></i>
+                        </button>
                         <button className='btn btn-sm' onClick={()=>hendleUserDelete(item._id)}><i class="bi bi-trash-fill ps-icon text-danger"></i></button>
                     </td>
                     </tr>

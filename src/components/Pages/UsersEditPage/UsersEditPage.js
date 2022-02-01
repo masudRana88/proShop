@@ -5,7 +5,7 @@ import { Button, Col, Container, Form, FormCheck, FormControl, FormGroup, FormLa
 import { useDispatch } from 'react-redux';
 import { useSelector } from 'react-redux';
 import { useNavigate, useParams } from 'react-router-dom';
-import { editUser } from '../../../redux/action/userAction/userAction';
+import { editUser, getUserList } from '../../../redux/action/userAction/userAction';
 import Message from '../../Message/Message';
 
 const UsersEditPage = () => {
@@ -28,7 +28,7 @@ const UsersEditPage = () => {
 
     useEffect(() => {
     if (users.length === 0) {
-        navigate("/users")
+        dispach(getUserList())
     } else {
         const editabeUser = users.find(i => i._id === id)
         setUser(editabeUser)
@@ -37,12 +37,12 @@ const UsersEditPage = () => {
         setIsAdmin(editabeUser.isAdmin)
         setMessege(false)
     }
-    },[id,dispach])
+    },[id,dispach,usersList])
     return (
         <Container>
             <Row className='mt-3'>
-                <Col md={6} className='mx-auto border border-primary'>
-                    <Button className='btn-light' onClick={()=> navigate("/users")}><i class="fas fa-chevron-left"></i> Back</Button>
+                <Col md={6} className='mx-auto'>
+                    <Button className='btn-light' onClick={()=> navigate("/admin/users")}><i class="fas fa-chevron-left"></i> Back</Button>
                     <h2 className='text-center mt-3'>Edit User</h2>
                     <h6 className='text-center'>Id : {user._id}</h6>
                     {messege&&<Message variant="success">User is updated</Message>}

@@ -35,7 +35,8 @@ const ProductPage = () => {
             <Link className="btn btn-light my-3" to="/"> Back </Link>
                 {isLoding ? <Loader /> : error ? <Message variant="denger">{ error}</Message>:<Row>
                 <Col md={6} lg={6}>
-                    <Image src={product.image} fluid/>
+                    {product.image && product.image.startsWith("/images")?(<Image src={product.image} fluid></Image>): (<Image src={`data:image/png;base64,${product.image}`} fluid></Image>)}
+                    {/* <Image src={product.image} fluid/> */}
                 </Col>
                 <Col md={3} lg={3}>
                     <ListGroup variant="flush">

@@ -3,7 +3,8 @@ import { useState } from 'react';
 import { Button, Col, Container, Form, FormControl, FormGroup, FormLabel, Row } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate, useParams } from 'react-router-dom';
-
+import { updateProduct } from '../../../redux/action/productRequest/productRequest';
+import Message from '../../Message/Message';
 const ProductUpdatePage = () => {
     const {id} = useParams()
     const navigate = useNavigate()
@@ -11,18 +12,28 @@ const ProductUpdatePage = () => {
     const productList = useSelector(state => state.productList)
     const { products, isLoding } = productList
     
-    const [product, setProduct] = useState({})
     const [name, setName] = useState("")
     const [brand, setBrand] = useState("")
     const [category, setCategory] = useState("")
     const [stock, setStock] = useState("")
     const [price, setPrice] = useState("")
     const [description, setDescription] = useState("")
-    const [image, setImage] = useState("")
+    const [image, setImage] = useState(null)
+    const [success,setSuccess] = useState(false)
 
     const hendleUpdate = e => {
         e.preventDefault()
-        console.log("update")
+        setSuccess(false)
+        const formData = new FormData()
+        formData.append('image', image);
+        formData.append('name', name);
+        formData.append('brand', brand);
+        formData.append('category', category);
+        formData.append('stock', stock);
+        formData.append('price', price);
+        formData.append('description', description);
+        formData.append("id", id);
+        dispach(updateProduct(formData,setSuccess))
     }
     
     useEffect(() => {
@@ -44,6 +55,7 @@ const ProductUpdatePage = () => {
                 <Col md={6} className='mx-auto border'>
                     <h1 className='text-center'>Update Product</h1>
                     <p className='text-center'>ID: {id}</p>
+                    {success && <Message variant="success">Product is Update</Message>}
                     <Form onSubmit={hendleUpdate}>
                         <FormGroup className='mb-3' controlId='name'>
                             <FormLabel >Name</FormLabel>
@@ -71,7 +83,7 @@ const ProductUpdatePage = () => {
                         </FormGroup>
                         <FormGroup className='mb-3' controlId='email'>
                             <Form.Label>Image</Form.Label>
-                            <Form.Control type="file" placeholder="Enter email" accept="image/*" onChange={(e)=> setImage(e.target.file)}/>
+                            <Form.Control type="file" placeholder="Enter email" accept="image/*" onChange={(e)=> setImage(e.target.files[0])}/>
                         </FormGroup>
                     <Button className='mt-3' type="submit">Update</Button>
                     </Form>

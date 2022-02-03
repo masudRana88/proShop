@@ -30,7 +30,7 @@ export const productDetailsRequest =(action)=> async (dispach)=>{
     }
 }
 
-export const addProduct = (formdata) =>async(dispach)=> {
+export const addProduct = (formdata,setSuccess) =>async(dispach)=> {
     try {
         dispach({ type: "ADD_PRODUCT_REQUEST" })
         
@@ -39,17 +39,66 @@ export const addProduct = (formdata) =>async(dispach)=> {
             const token = "Bearer "+ userInfo.token
             const config = {
                 headers: {
-                'Content-Type': 'application/json',
                 token
                 }
         } 
         
-        const { data } = await axios.get("http://localhost:5000/api/order/admin/add-order", formdata, config)
+        const { data } = await axios.post("http://localhost:5000/api/products/admin/add-product", formdata, config)
         dispach({
             type: "ADD_PRODUCT_SUCCESS",
             payload: data
         })
+        setSuccess(true)
     } catch (error) {
         dispach({ type: "ADD_PRODUCT_FAIL" })
+    }
+}
+
+export const updateProduct = (FormData, setSuccess) => async (dispach)=>{
+    try {
+         dispach({ type: "UPDATE_PRODUCT_REQUEST" })
+        
+        //  Admin Auth token
+         const userInfo = JSON.parse(localStorage.getItem('userInfo'))
+            const token = "Bearer "+ userInfo.token
+            const config = {
+                headers: {
+                token
+                }
+        } 
+        
+        const { data } = await axios.put("http://localhost:5000/api/products/admin/update-product", FormData, config)
+        dispach({
+            type: "UPDATE_PRODUCT_SUCCESS",
+            payload: data
+        })
+        setSuccess(true)
+    } catch (error) {
+         dispach({ type: "UPDATE_PRODUCT_FAIL" })
+    }
+}
+
+export const deleteProduct = (id) => async (dispach) => {
+    try {
+        dispach({ type: "DELETE_PRODUCT_REQUEST" })
+
+        //  Admin Auth token
+         const userInfo = JSON.parse(localStorage.getItem('userInfo'))
+            const token = "Bearer "+ userInfo.token
+            const config = {
+                headers: {
+                token
+                }
+        } 
+        
+        const { data } = await axios.delete(`http://localhost:5000/api/products/admin/delete-product/${id}`, config)
+
+        dispach({
+            type: "DELETE_PRODUCT_SUCCESS",
+            payload: data
+        })
+
+    } catch (error) {
+        dispach({ type: "DELETE_PRODUCT_FAIL" })
     }
 }

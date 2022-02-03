@@ -1,17 +1,33 @@
 export const productListReduser = (state= {products : []}, action) => {
     switch (action.type) {
+        // get product list
         case "PRODUCT_LIST_REQUEST":
             return {...state, isLoding: true, products: [] };
         case "PRODUCT_LIST_SUCCESS":
             return {...state, isLoding: false, products: action.payload };
         case "PRODUCT_LIST_FAIL":
             return { ...state, isLoding: false, products: [], error: action.error };
+        // Add Product 
         case "ADD_PRODUCT_REQUEST":
             return { ...state, isLoding: true, error: false };
         case "ADD_PRODUCT_SUCCESS":
             return { ...state, isLoding: false, error: false, products: action.payload };
         case "ADD_PRODUCT_FAIL":
-            return { ...state, isLoding: false, error: true};
+            return { ...state, isLoding: false, error: true };
+        // Update Product
+        case "UPDATE_PRODUCT_REQUEST":
+            return { ...state, isLoding: true, error: true };
+        case "UPDATE_PRODUCT_SUCCESS":
+            return { ...state, isLoding: false, error: false, products: action.payload }
+        case "UPDATE_PRODUCT_FAIL":
+            return { ...state, isLoding: false, error: true };
+        // Delete product
+        case "DELETE_PRODUCT_REQUEST":
+            return { ...state, isLoding: true, error: false };
+        case "DELETE_PRODUCT_SUCCESS":
+            return { ...state, isLoding: false, error: false, products: action.payload };
+        case "DELETE_PRODUCT_FAIL":
+            return { ...state, isLoding: false, error: true };
         default: 
             return state
     }

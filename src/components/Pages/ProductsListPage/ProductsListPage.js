@@ -4,7 +4,7 @@ import { Button, Col, Container, Row, Table } from 'react-bootstrap';
 import { useDispatch } from 'react-redux';
 import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import { productRequest } from '../../../redux/action/productRequest/productRequest';
+import { deleteProduct, productRequest } from '../../../redux/action/productRequest/productRequest';
 import Loader from '../../Loader/Loader';
 
 const ProductsListPage = () => {
@@ -15,7 +15,7 @@ const ProductsListPage = () => {
     const {products, isLoding} = productList
 
     const hendleDelete = (id) => {
-        console.log(id)
+        dispach(deleteProduct(id))
     }
     useEffect(() => {
         if (products.length === 0) {

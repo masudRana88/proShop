@@ -3,13 +3,37 @@ import { useState } from 'react';
 import { Button, Col, Container, Form, FormControl, FormGroup, FormLabel, Row } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate, useParams } from 'react-router-dom';
+import { addProduct } from '../../../redux/action/productRequest/productRequest';
+import Message from '../../Message/Message';
 
 const AddProduct = () => {
     const dispach = useDispatch()
+    const navigate = useNavigate()
     
+    const resetForm = () => {
+        document.getElementById("updateForm").reset()
+        setName('')
+        setBrand("")
+        setCategory("")
+        setPrice("")
+        setStock("")
+        setDescription("")
+    }
+
     const hendleUplode = (e) => {
         e.preventDefault()
-        console.log("update")
+        setSuccess(false)
+        let formData = new FormData()
+        formData.append('image', image);
+        formData.append('name', name);
+        formData.append('brand', brand);
+        formData.append('category', category);
+        formData.append('stock', stock);
+        formData.append('price', price);
+        formData.append('description', description);
+        console.log(image)
+        dispach(addProduct(formData, setSuccess))
+        // resetForm()
     }
     
     const [name, setName] = useState("")
@@ -19,12 +43,15 @@ const AddProduct = () => {
     const [price, setPrice] = useState("")
     const [description, setDescription] = useState("")
     const [image, setImage] = useState(null)
+    const [success, setSuccess] = useState(false)
     return (
         <Container>
              <Row>
-                <Col md={6} className='mx-auto border'>
+                <Col md={6} className='mx-auto mt-3'>
+                    <Button className='btn-light' onClick={()=> navigate("/admin/products")}><i class="fas fa-chevron-left"></i> Back</Button>
                     <h1 className='text-center mt-3'>Add Product</h1>
-                    <Form onSubmit={hendleUplode}>
+                    {success&& <Message variant="success">Product is Added</Message>}
+                    <Form onSubmit={hendleUplode} id="updateForm">
                         <FormGroup className='mb-3' controlId='name'>
                             <FormLabel >Name</FormLabel>
                             <FormControl type="text" required placeholder="Enter name" value={name} onChange={(e)=>setName(e.target.value)}/>
@@ -51,7 +78,7 @@ const AddProduct = () => {
                         </FormGroup>
                         <FormGroup className='mb-3' controlId='email'>
                             <Form.Label>Image</Form.Label>
-                            <Form.Control type="file" required placeholder="Enter email" accept="image/*" onChange={(e)=> setImage(e.target.file)}/>
+                            <Form.Control type="file" required placeholder="Enter email" accept="image/*" onChange={(e)=> setImage(e.target.files[0])}/>
                         </FormGroup>
                     <Button className='mt-3' type='submit'>Uplode</Button>
                     </Form>

@@ -15,6 +15,20 @@ export const productRequest = ()=> async(dispach) => {
     }
 }
 
+export const getTopProduct = () => async (dispach) => {
+    try {
+        dispach({ type: "TOP_PRODUCT_LIST_REQUEST" })
+        
+
+        const {data} = await axios.get("http://localhost:5000/api/products/top")
+        
+
+        await dispach({type: "TOP_PRODUCT_LIST_SUCCESS", payload: data})
+    } catch (error) {
+        dispach({type: "TOP_PRODUCT_LIST_FAIL", error: "Sorry! Product is not found ..."})
+    }
+}
+
 export const productDetailsRequest =(action)=> async (dispach)=>{
     try {
         dispach({ type: "PRODUCT_Details_REQUEST" })

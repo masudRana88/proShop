@@ -14,7 +14,6 @@ const UserListPage = () => {
     const { users } = userList
     // Hendle user Delete
     const hendleUserDelete = (id) => {
-        console.log(id)
         if (window.confirm("You wants to delete this user??") == true) {
             dispach(deleteUser(id))
         }

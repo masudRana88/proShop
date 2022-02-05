@@ -7,6 +7,7 @@ import AddProduct from './components/Pages/AddProduct/AddProduct';
 import CartPage from './components/Pages/CartPage/CartPage';
 import HomePage from './components/Pages/HomePage/HomePage';
 import LoginPage from './components/Pages/LoginPage/LoginPage';
+import OrderListPage from './components/Pages/OrderListPage/OrderListPage';
 import OrderPage from './components/Pages/OrderPage/OrderPage';
 import PaymentPage from './components/Pages/PaymentPage/PaymentPage';
 import PlaceOrder from './components/Pages/PlaceOrder/PlaceOrder';
@@ -42,6 +43,7 @@ const App = () => {
         <Route path='/admin/products' element={<AdminRoutes><ProductsListPage/></AdminRoutes>} />
         <Route path='/admin/products/:id/edit'  element={<AdminRoutes><ProductUpdatePage/></AdminRoutes>} />
         <Route path='/admin/products/add' element={<AdminRoutes><AddProduct/></AdminRoutes>} />
+        <Route path='/admin/order' element={<AdminRoutes><OrderListPage/></AdminRoutes>} />
         
       </Routes>
       {/* <Footer/> */}

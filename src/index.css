@@ -13,3 +13,11 @@ h3{
 .ps-icon{
     font-size: 18px !important;
 }
+
+/*BootStrep carousel bottom botton */
+.carousel-indicators{
+    display: none !important;
+}
+.my-courser{
+    background-color: rgb(197, 194, 194) !important;
+}

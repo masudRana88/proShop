@@ -7,6 +7,7 @@ import { productRequest } from "../../redux/action/productRequest/productRequest
 import { store } from '../../redux/store';
 import Loader from '../Loader/Loader';
 import Message from '../Message/Message';
+import { useState } from 'react';
 
 
 const ProductContainer = () => {
@@ -14,6 +15,11 @@ const ProductContainer = () => {
     
     const productList = useSelector(state => state.productList)
     const { isLoding, error, products } = productList; 
+    const [pageCount, setPageCount] = useState(0)
+    const size = 6
+    
+    
+    console.log(pageCount)
     useEffect(() => {
         dispacth(productRequest())
     },[])
@@ -23,7 +29,7 @@ const ProductContainer = () => {
             {isLoding ?
                 <Loader /> : error ? <Message variant="danger"><p>{ error}</p></Message> : <Row>
                 {
-                 products.map(product => (
+                 products?.productsList?.map(product => (
                      <Col key={product._id} sm={12} md={6} lg={4}>
                        <Product product={ product}/>
                     </Col>

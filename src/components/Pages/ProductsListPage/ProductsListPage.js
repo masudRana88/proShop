@@ -15,7 +15,9 @@ const ProductsListPage = () => {
     const {products, isLoding} = productList
 
     const hendleDelete = (id) => {
-        dispach(deleteProduct(id))
+        if (window.confirm("You wants to delete this Product?") == true) {
+            dispach(deleteProduct(id))
+        }
     }
     useEffect(() => {
         if (products.length === 0) {

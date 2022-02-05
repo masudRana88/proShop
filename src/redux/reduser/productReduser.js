@@ -33,6 +33,19 @@ export const productListReduser = (state= {products : []}, action) => {
     }
 }
 
+export const topProductReduser = (state = {products : []},action) => {
+    switch (action.type) {
+       case "TOP_PRODUCT_LIST_REQUEST":
+            return {...state, isLoding: true, products: [] };
+        case "TOP_PRODUCT_LIST_SUCCESS":
+            return {...state, isLoding: false, products: action.payload };
+        case "TOP_PRODUCT_LIST_FAIL":
+            return { ...state, isLoding: false, products: [], error: action.error };
+        default: 
+            return {...state}
+    }
+}
+
 export const productDetailsReduser = (state = {product: {}}, action) => {
     switch (action.type) {
         case "PRODUCT_Details_REQUEST":

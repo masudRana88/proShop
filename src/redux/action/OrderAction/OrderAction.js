@@ -27,6 +27,66 @@ export const orderSend = (order) => async(dichpach) => {
     
 }
 
+// Get All order
+export const getAllOrder = () => async (dispatch) => {
+    try {   
+        dispatch({
+                type: "ALL_ORDER_GET_REQUEST"
+            })
+         const userInfo = JSON.parse(localStorage.getItem('userInfo'))
+            const token = "Bearer "+ userInfo.token
+            const config = {
+                headers: {
+                'Content-Type': 'application/json',
+                token
+                }
+        } 
+        const { data } = await axios.get(`http://localhost:5000/api/order/admin/order/`, config)
+        dispatch({
+            type: "ALL_ORDER_GET_SUCCESS",
+            paylod : data
+            })
+
+    } catch (error) {
+        dispatch({
+            type: "ALL_ORDER_GET_FAIL",
+        })
+    }
+}
+
+// Delete order 
+export const deleteOrder = (id) => async (dispatch,getStore) => {
+    try {   
+        dispatch({
+                type: "DELETE_ORDER_REQUEST"
+            })
+         const userInfo = JSON.parse(localStorage.getItem('userInfo'))
+            const token = "Bearer "+ userInfo.token
+            const config = {
+                headers: {
+                'Content-Type': 'application/json',
+                token
+                }
+        } 
+        console.log(id)
+        const { data } = await axios.delete(`http://localhost:5000/api/order/delete/${id}`, config)
+        dispatch({
+            type: "DELETE_ORDER_SUCCESS",
+            paylod : data
+        })
+        const store = getStore()
+        const newOrder = store.allOrderList.allOrder.filter(item => item._id !== id)
+        dispatch({
+            type: "UPDATE_ORDER",
+            paylod:newOrder
+        })
+    } catch (error) {
+        dispatch({
+            type: "DELETE_ORDER_FAIL",
+        })
+    }
+}
+
 // Get order by Order Id
 export const getOrderById = (id) => async (dispatch) => {
     
@@ -102,6 +162,38 @@ export const orderPayAction = (id,details) => async (dichpach) => {
     } catch (error) {
         dichpach({
             type: "ORDER_PAY_FAIL"
+        })
+    }
+}
+// Update Order to Deleverd
+export const orderDeleverdAction = (id) => async (dichpach,getStore) => {
+    try {
+        dichpach({
+            type: "ORDER_DELEVERD_REQUEST"
+        })
+        
+        const userInfo = JSON.parse(localStorage.getItem('userInfo'))
+            const token = "Bearer "+ userInfo.token
+            const config = {
+                headers: {
+                'Content-Type': 'application/json',
+                token
+                }
+        } 
+        const {data} = await axios.put(`http://localhost:5000/api/order/deleverd/`,{id},config)
+        dichpach({
+            type: "ORDER_DELEVERD_SUCCESS",
+            payload : data
+        })
+        const store = getStore()
+        const deleverd = store.allOrderList.allOrder.find(item => item._id === id)
+        // dichpach({
+        //     type: "UPDATE_ORDER",
+        //     paylod:newOrder
+        // })
+    } catch (error) {
+        dichpach({
+            type: "ORDER_DELEVERD_FAIL"
         })
     }
 }

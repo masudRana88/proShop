@@ -33,8 +33,25 @@ export const orderSavaToDb = (state = {}, action) => {
     }
 }
 
+
+// GET All Order
+export const getAllOrderReducer = (state = {allOrder:[]},action) => {
+  switch (action.type) {
+    case "ALL_ORDER_GET_REQUEST":
+      return { ...state, isLoding: true, error: false,allOrder: [] }
+    case "ALL_ORDER_GET_SUCCESS":
+      return {...state, isLoding: false, error: false, allOrder: action.paylod}
+    case "ALL_ORDER_GET_FAIL":
+      return {...state, isLoding: false, error: true, allOrder: []}
+    case "UPDATE_ORDER":
+      return {...state, isLoding: false, error: true, allOrder: action.paylod}
+    default:
+      return { ...state }
+  }
+}
+
 // Get Order by Id name
-export const getOrder = (state={}, action) => {
+export const getOrderByIdReducer = (state={}, action) => {
   
   switch (action.type) {
     case "ORDER_GET_REQUEST":
@@ -59,6 +76,34 @@ export const orderPayReducer = (state={orderPay:{}}, action) => {
       return {isLoding: false, error: false, orderPay: action.payload }
     case "ORDER_PAY_FAIL":
       return {isLoding: false, error: true }
+    default:
+      return {...state}
+  }
+}
+
+
+export const deleteOrderReducer = (state={}, action) => {
+  switch (action.type) {
+    case "DELETE_ORDER_REQUEST":
+      return {...state,error: false}
+    case "DELETE_ORDER_SUCCESS":
+      return {...state,deleteOrder:action.paylod }
+    case "DELETE_ORDER_FAIL":
+      return {...state,error: true }
+    default:
+      return {...state}
+  }
+}
+
+export const orderDeleverdReducer = (state={orderDeleverd:{}}, action) => {
+  
+  switch (action.type) {
+    case "ORDER_DELEVERD_REQUEST":
+      return {...state,isLoding: true, error: false}
+    case "ORDER_DELEVERD_SUCCESS":
+      return {...state,isLoding: false, error: false, orderDeleverd: action.payload }
+    case "ORDER_DELEVERD_FAIL":
+      return {...state,isLoding: false, error: true }
     default:
       return {...state}
   }

@@ -31,9 +31,8 @@ const AddProduct = () => {
         formData.append('stock', stock);
         formData.append('price', price);
         formData.append('description', description);
-        console.log(image)
         dispach(addProduct(formData, setSuccess))
-        // resetForm()
+        resetForm()
     }
     
     const [name, setName] = useState("")

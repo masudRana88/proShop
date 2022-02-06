@@ -8,7 +8,6 @@ import { getTopProduct } from '../../redux/action/productRequest/productRequest'
 const CarouselContainer = () => {
   const topProduct = useSelector(state => state.topProduct)
   const { products } = topProduct
-  console.log(products)
   const dispatch = useDispatch()
   useEffect(() => {
     dispatch(getTopProduct())

@@ -25,7 +25,7 @@ const ProfilePage = () => {
     const hendleUpdateUser = (e, email, name, password) => {
         e.preventDefault()
         dispach(updateUserProfile(email, name, password))
-        console.log(name,email)
+        
     }
 
     useEffect(() => {

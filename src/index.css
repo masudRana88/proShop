@@ -21,3 +21,11 @@ h3{
 .my-courser{
     background-color: rgb(197, 194, 194) !important;
 }
+
+.pageBtn{
+    margin: 0 5px !important;
+}
+
+.navbar-nav .dropdown-menu{
+    position: absolute !important;
+}

@@ -46,7 +46,7 @@ const App = () => {
         <Route path='/admin/order' element={<AdminRoutes><OrderListPage/></AdminRoutes>} />
         
       </Routes>
-      {/* <Footer/> */}
+      <Footer/>
     </Router>
   );
 };

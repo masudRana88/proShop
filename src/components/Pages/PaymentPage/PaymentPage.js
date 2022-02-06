@@ -10,7 +10,6 @@ import { useNavigate } from 'react-router-dom';
 const PaymentPage = () => {
     const [paymentMethod, setPaymentMethod] = useState('PayPal')
     const dispach = useDispatch()
-    console.log(paymentMethod)
     const navigate = useNavigate()
     const hendleSubmit = async(e) => {
         e.preventDefault()

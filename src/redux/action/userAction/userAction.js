@@ -173,7 +173,7 @@ export const editUser = (user,setMessege) => async (dispach) => {
         dispach({
             type: "USER_EDIT_REQUEST"
         })
-        console.log(user.id)
+       
         // get jwt token
         const userInfo = JSON.parse(localStorage.getItem('userInfo'))
         const token = "Bearer "+ userInfo.token

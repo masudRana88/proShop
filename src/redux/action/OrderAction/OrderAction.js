@@ -68,7 +68,7 @@ export const deleteOrder = (id) => async (dispatch,getStore) => {
                 token
                 }
         } 
-        console.log(id)
+  
         const { data } = await axios.delete(`http://localhost:5000/api/order/delete/${id}`, config)
         dispatch({
             type: "DELETE_ORDER_SUCCESS",

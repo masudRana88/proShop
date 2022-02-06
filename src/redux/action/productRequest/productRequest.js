@@ -1,12 +1,12 @@
 import axios from "axios"
 
 
-export const productRequest = ()=> async(dispach) => {
+export const productRequest = (page,size)=> async(dispach) => {
     try {
         dispach({ type: "PRODUCT_LIST_REQUEST" })
         
 
-        const {data} = await axios.get("http://localhost:5000/api/products")
+        const {data} = await axios.get(`http://localhost:5000/api/products?page=${page}&&size=${size}`)
         
 
         await dispach({type: "PRODUCT_LIST_SUCCESS", payload: data})

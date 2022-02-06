@@ -19,7 +19,6 @@ const OrderListPage = () => {
         dispatch(orderDeleverdAction(id))
     }
     const hendleDelete = (id) => {
-        console.log(id)
         dispatch(deleteOrder(id))
     }
     useEffect(() => {

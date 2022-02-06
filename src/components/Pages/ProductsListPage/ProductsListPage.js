@@ -11,8 +11,9 @@ const ProductsListPage = () => {
     const dispach = useDispatch()
     const navigate = useNavigate()
 
-    const productList = useSelector(state => state.productList)
-    const {products, isLoding} = productList
+    const productLists = useSelector(state => state.productList)
+    const { products, isLoding } = productLists
+    const {productsList} = products
 
     const hendleDelete = (id) => {
         if (window.confirm("You wants to delete this Product?") == true) {
@@ -20,9 +21,7 @@ const ProductsListPage = () => {
         }
     }
     useEffect(() => {
-        if (products.length === 0) {
             dispach(productRequest())
-        }
     },[])
     return (
         <Container >
@@ -44,7 +43,7 @@ const ProductsListPage = () => {
                     </tr>
                 </thead>
                 <tbody>
-                {products.map(item=><tr key={item.email}>
+                {productsList?.map(item=><tr key={item.email}>
                         <td>{ item._id}</td>
                         <td>{ item.name}</td>
                         <td>{ item.category}</td>

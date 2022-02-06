@@ -52,5 +52,5 @@ export const addPaymentMetod = (paymentMethod) => async (dispach) => {
         type: "ADD_PAYMENT_METHODE",
         payload : paymentMethod
     })
-    console.log(paymentMethod)
+   
 }

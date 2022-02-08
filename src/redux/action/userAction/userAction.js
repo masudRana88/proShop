@@ -14,7 +14,7 @@ export const userLoginRequest = (email, password,goBack) => async (dispach) => {
             }
         }
 
-        const {data} = await axios.post("http://localhost:5000/api/user/login",{email, password},config)
+        const {data} = await axios.post("https://safe-citadel-09142.herokuapp.com/api/user/login",{email, password},config)
         //Login success 
         dispach({
             type: "USER_LOGIN_SUCCESS",
@@ -39,7 +39,7 @@ export const userRegisterRequest = (name, email, password) => async (dispach) =>
                 'Content-Type': 'application/json',
             }
         }
-    const { data } = await axios.post("http://localhost:5000/api/user/register", { name, email, password }, config)
+    const { data } = await axios.post("https://safe-citadel-09142.herokuapp.com/api/user/register", { name, email, password }, config)
         dispach({
             type: "USER_REGISTER_REQUEST",
             payload: {
@@ -93,7 +93,7 @@ export const getUserProfile = (user) => async (dispach, getState) => {
             token
             }
         }
-        const { data } = await axios.get("http://localhost:5000/api/user/profile", config)
+        const { data } = await axios.get("https://safe-citadel-09142.herokuapp.com/api/user/profile", config)
         dispach({
             type: "USER_PROFILE_SUCCESS",
             payload:  {
@@ -126,7 +126,7 @@ export const getUserList = () => async (dispach) => {
             token
             }
         }
-        const { data } =await axios.get("http://localhost:5000/api/user", config)
+        const { data } =await axios.get("https://safe-citadel-09142.herokuapp.com/api/user", config)
         // console.log(data)
         dispach({
             type: "USER_LIST_SUCCESS",
@@ -154,7 +154,7 @@ export const deleteUser = (id) => async (dispach) => {
             token
             }
         }
-        const { data } = await axios.delete(`http://localhost:5000/api/user/${id}`, config)
+        const { data } = await axios.delete(`https://safe-citadel-09142.herokuapp.com/api/user/${id}`, config)
         dispach({
             type: "USER_DELETE_SUCCESS",
             payload: data
@@ -183,7 +183,7 @@ export const editUser = (user,setMessege) => async (dispach) => {
             token
             }
         }
-        const { data } = await axios.put(`http://localhost:5000/api/user/${user.id}`,user, config)
+        const { data } = await axios.put(`https://safe-citadel-09142.herokuapp.com/api/user/${user.id}`,user, config)
         dispach({
             type: "USER_EDIT_SUCCESS",
             payload: data
@@ -209,7 +209,7 @@ export const updateUserProfile = (email, name, password) => async (dispach,getSt
             token
             }
         }
-        const { data } = await axios.post("http://localhost:5000/api/user/profile", { email, name, password }, config)
+        const { data } = await axios.post("https://safe-citadel-09142.herokuapp.com/api/user/profile", { email, name, password }, config)
         
         dispach({
             type: "USER_PROFILE_UPDATE_SUCCESS",

@@ -14,7 +14,7 @@ export const orderSend = (order) => async(dichpach) => {
                 token
                 }
             }                               
-            const { data } = await axios.post("http://localhost:5000/api/order", order, config)
+            const { data } = await axios.post("https://safe-citadel-09142.herokuapp.com/api/order", order, config)
             dichpach({
                 type: "ORDER_SEND_TO_DB",
                 paylod: data
@@ -41,7 +41,7 @@ export const getAllOrder = () => async (dispatch) => {
                 token
                 }
         } 
-        const { data } = await axios.get(`http://localhost:5000/api/order/admin/order/`, config)
+        const { data } = await axios.get(`https://safe-citadel-09142.herokuapp.com/api/order/admin/order/`, config)
         dispatch({
             type: "ALL_ORDER_GET_SUCCESS",
             paylod : data
@@ -69,7 +69,7 @@ export const deleteOrder = (id) => async (dispatch,getStore) => {
                 }
         } 
   
-        const { data } = await axios.delete(`http://localhost:5000/api/order/delete/${id}`, config)
+        const { data } = await axios.delete(`https://safe-citadel-09142.herokuapp.com/api/order/delete/${id}`, config)
         dispatch({
             type: "DELETE_ORDER_SUCCESS",
             paylod : data
@@ -102,7 +102,7 @@ export const getOrderById = (id) => async (dispatch) => {
                 token
                 }
         } 
-            const { data } = await axios.get(`http://localhost:5000/api/order/${id}`, config)
+            const { data } = await axios.get(`https://safe-citadel-09142.herokuapp.com/api/order/${id}`, config)
         dispatch({
             type: "ORDER_GET_SUCCESS",
             paylod : data
@@ -133,7 +133,7 @@ export const getOrderByUserId = () => async (dichpach) => {
                 }
             } 
 
-    const {data} = await axios.get("http://localhost:5000/api/order/user/order",config)
+    const {data} = await axios.get("https://safe-citadel-09142.herokuapp.com/api/order/user/order",config)
     
     dichpach({
         type: "USER_ORDER_GET_SUCCESS",
@@ -154,7 +154,7 @@ export const orderPayAction = (id,details) => async (dichpach) => {
         dichpach({
             type: "ORDER_PAY_REQUEST"
         })
-        const {data} = await axios.put(`http://localhost:5000/api/order/pay/${id}`, details)
+        const {data} = await axios.put(`https://safe-citadel-09142.herokuapp.com/api/order/pay/${id}`, details)
         dichpach({
             type: "ORDER_PAY_SUCCESS",
             payload : data
@@ -180,7 +180,7 @@ export const orderDeleverdAction = (id) => async (dichpach,getStore) => {
                 token
                 }
         } 
-        const {data} = await axios.put(`http://localhost:5000/api/order/deleverd/`,{id},config)
+        const {data} = await axios.put(`https://safe-citadel-09142.herokuapp.com/api/order/deleverd/`,{id},config)
         dichpach({
             type: "ORDER_DELEVERD_SUCCESS",
             payload : data

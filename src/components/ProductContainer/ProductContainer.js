@@ -21,7 +21,7 @@ const ProductContainer = () => {
     const size = 6
     
     const PageCount = async() => {
-    const { data } = await axios.get("http://localhost:5000/api/products")
+    const { data } = await axios.get("https://safe-citadel-09142.herokuapp.com/api/products")
     const productCount = data.productCount
     const pagenumber = Math.ceil(Number(productCount) / size)
     setPageCount(pagenumber)

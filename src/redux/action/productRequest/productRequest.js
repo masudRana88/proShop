@@ -6,7 +6,7 @@ export const productRequest = (page,size)=> async(dispach) => {
         dispach({ type: "PRODUCT_LIST_REQUEST" })
         
 
-        const {data} = await axios.get(`http://localhost:5000/api/products?page=${page}&&size=${size}`)
+        const {data} = await axios.get(`https://safe-citadel-09142.herokuapp.com/api/products?page=${page}&&size=${size}`)
         
 
         await dispach({type: "PRODUCT_LIST_SUCCESS", payload: data})
@@ -20,7 +20,7 @@ export const getTopProduct = () => async (dispach) => {
         dispach({ type: "TOP_PRODUCT_LIST_REQUEST" })
         
 
-        const {data} = await axios.get("http://localhost:5000/api/products/top")
+        const {data} = await axios.get("https://safe-citadel-09142.herokuapp.com/api/products/top")
         
 
         await dispach({type: "TOP_PRODUCT_LIST_SUCCESS", payload: data})
@@ -34,7 +34,7 @@ export const productDetailsRequest =(action)=> async (dispach)=>{
         dispach({ type: "PRODUCT_Details_REQUEST" })
         
 
-        const {data} = await axios.get(`http://localhost:5000/api/products/${action}`)
+        const {data} = await axios.get(`https://safe-citadel-09142.herokuapp.com/api/products/${action}`)
         
 
         await dispach({type: "PRODUCT_Details_SUCCESS", payload: data})
@@ -57,7 +57,7 @@ export const addProduct = (formdata,setSuccess) =>async(dispach)=> {
                 }
         } 
         
-        const { data } = await axios.post("http://localhost:5000/api/products/admin/add-product", formdata, config)
+        const { data } = await axios.post("https://safe-citadel-09142.herokuapp.com/api/products/admin/add-product", formdata, config)
         dispach({
             type: "ADD_PRODUCT_SUCCESS",
             payload: data
@@ -81,7 +81,7 @@ export const updateProduct = (FormData, setSuccess) => async (dispach)=>{
                 }
         } 
         
-        const { data } = await axios.put("http://localhost:5000/api/products/admin/update-product", FormData, config)
+        const { data } = await axios.put("https://safe-citadel-09142.herokuapp.com/api/products/admin/update-product", FormData, config)
         dispach({
             type: "UPDATE_PRODUCT_SUCCESS",
             payload: data
@@ -105,7 +105,7 @@ export const deleteProduct = (id) => async (dispach) => {
                 }
         } 
         
-        const { data } = await axios.delete(`http://localhost:5000/api/products/admin/delete-product/${id}`, config)
+        const { data } = await axios.delete(`https://safe-citadel-09142.herokuapp.com/api/products/admin/delete-product/${id}`, config)
 
         dispach({
             type: "DELETE_PRODUCT_SUCCESS",

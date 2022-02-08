@@ -7,12 +7,12 @@ import ProductContainer from '../../ProductContainer/ProductContainer';
 
 const HomePage = () => {
     return (
-        <><main className="py-3 ">
+        <><div className="py-3 ">
             <CarouselContainer/>   
             <Container>
                 <ProductContainer/>
             </Container>
-        </main>
+        </div>
         </>
     );
 };
